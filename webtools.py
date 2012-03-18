@@ -6,8 +6,24 @@ class WebToolsRequest():
   def __init__(self, user_id):
     self.user_id = user_id
     self.api_url = 'https://secure.shippingapis.com/ShippingAPI.dll'
+    self.test_api_url = 'https://secure.shippingapis.com/ShippingAPITest.dll'
     self.address_fields = ('FirmName', 'Address1', 'Address2', 'City', 'State', 'Zip5', 'Zip4')
-  
+    self.verify_root_tag = 'AddressValidateRequest'
+    self.zipcode_lookup_root_tag = 'ZipCodeLookupRequest'
+    self.citystate_lookup_root_tag = 'CityStateLookupRequest'
+    self.test_data = [
+      {
+      'address2':'6406 Ivy Lane',
+      'city':'Greenbelt',
+      'state':'MD'
+      },
+      {
+        'address2':'8 Wildwood Drive',
+        'city':'Old Lyme',
+        'state':'CT',
+        'zip5':'06371'
+      }]
+     
   def build_request_xml(self, data, root_tag):
     root = Element(root_tag, USERID=self.user_id)
     for i, address in enumerate(data):
@@ -16,20 +32,22 @@ class WebToolsRequest():
         SubElement(address_element, field).text = address.get(field.lower())
     return tostring(root)
 
-  def request(self, api_name, xml):
-    response = requests.get(self.api_url, params={'API':api_name, 'XML':xml})
+  def request(self, api_name, xml, test=False):
+    if test:
+      response = requests.get(self.test_api_url, params={'API':api_name, 'XML':xml})
+    else:
+      response = requests.get(self.api_url, params={'API':api_name, 'XML':xml})
     return response
 
   def verify(self, data):
     api_name = 'Verify'
-    xml = self.build_request_xml(data, 'AddressValidateRequest')
-    print xml
+    xml = self.build_request_xml(data, self.verify_root_tag)
     response = self.request(api_name, xml)
     return Response(response)
 
   def zipcode_lookup(self, data):
     api_name = 'ZipCodeLookup'
-    xml = self.build_request_xml(data, 'ZipCodeLookupRequest')
+    xml = self.build_request_xml(data, self.zipcode_lookup_root_tag)
     response = self.request(api_name, xml)
     return Response(response)
 
@@ -38,6 +56,29 @@ class WebToolsRequest():
     xml = self.build_request_xml(data, 'CityStateLookupRequest')
     response = self.request(api_name, xml)
     return Response(response)
+
+  def verify_test(self):
+    api_name = 'Verify'
+    xml = self.build_request_xml(self.test_data, self.verify_root_tag)
+    response = self.request(api_name, xml)
+    print response.content
+
+  def zipcode_lookup_test(self):
+    api_name = 'ZipCodeLookup'
+    xml = self.build_request_xml(self.test_data, self.zipcode_lookup_root_tag)
+    response = self.request(api_name, xml)
+    print response.content
+
+  def citystate_lookup_test(self):
+    api_name = 'CityStateLookup'
+    xml = self.build_request_xml(self.test_data, self.citystate_lookup_root_tag)
+    response = self.request(api_name, xml)
+    print response.content
+
+  def make_all_test_requests(self):
+    self.verify_test()
+    self.zipcode_lookup_test()
+    self.citystate_lookup_test()
 
 
 class Response():
