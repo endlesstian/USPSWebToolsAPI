@@ -154,10 +154,19 @@ class WebToolsAddress():
   def __init__(self,address):
     self.address = address
   
+  def __str__(self):
+    fields = ('firmname','address1','address2')
+    add_string = ''
+    for field in fields:
+      if self.address[field]:
+        add_string += '%s\n' % self.address[field]  
+    add_string += self.last_line
+    return add_string
+  
   @property
   def address(self):
-    return self.address
-  
+    return self.address_dict
+
   @property
   def address1(self):
     return self.address['address1']
@@ -181,5 +190,24 @@ class WebToolsAddress():
   @property
   def zip5(self):
     return self.address['zip5']
+
+  @property
+  def address_lines(self):
+    if self.address1:
+      return '%s\n%s' % (self.address1, self.address2)
+    else:
+      return '%s' % self.address2
+  
+  @property
+  def zipcode(self):
+    return '%s-%s' % (self.zip5, self.zip4)
+
+  @property
+  def citystate(self):
+    return '%s, %s' % (self.city, self.state)
+
+  @property
+  def last_line(self):
+    return '%s %s' % (self.citystate, self.zipcode)
 
 

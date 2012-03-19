@@ -25,7 +25,7 @@ server, with their testing data. Here is how:
     w.citystate_lookup_test()
 
 Once this step is complete, you must contanct the USPS via the email address
-they included in your registration confirmation email. Once they response
+they included in your registration confirmation email. Once they respond
 affirmatively, you may use the API like this:
 
     from webtools_api import WebToolsRequest
@@ -60,6 +60,24 @@ formatted and verified information, accessible like this:
     {'city': 'DETROIT', 'firmname': "MUDGIE'S", 'address1': None, 'address2':
     '1300 PORTER ST', 'state': 'MI', 'id': '1', 'zip5': '48226', 'zip4':
     '2409'}
+
+    print verified_addresses[0].zipcode
+    48226-2913      
+
+    print verified_addresses[0].citystate
+    DETROIT, MI
+
+    print verified_addresses[0].address_lines
+    400 E CONGRESS ST
+
+    print verified_addresses[0].last_line
+    DETROIT, MI 48226-2913
+
+    print verified_addresses[0]
+    SWEETWATER TAVERN
+    400 E CONGRESS ST
+    DETROIT, MI 48226-2913
+
 
 ##Notes
 * You may submit a maximum of 5 addresses per API call
