@@ -37,7 +37,8 @@ affirmatively, you may use the API like this:
                     'address2': '400 E Congress St',
                     'city': 'Detroit',
                     'state': 'MI',
-                    'zip5': '48226'},
+                    'zip5': '48226'
+                  },
                   { 'firmname': "Mudgie's".
                     'address2': '1300 Porter St',
                     'zip5': '48226'
@@ -50,7 +51,15 @@ This will return an array of WebToolsAddress objects which contain the
 formatted and verified information, accessible like this:
 
     print verified_addresses[0].address2
+    400 E CONGRESS ST
+    
     print verified_addresses[1].zip4
+    2409
+
+    print verified_addresses[1].address
+    {'city': 'DETROIT', 'firmname': "MUDGIE'S", 'address1': None, 'address2':
+    '1300 PORTER ST', 'state': 'MI', 'id': '1', 'zip5': '48226', 'zip4':
+    '2409'}
 
 ##Notes
 * You may submit a maximum of 5 addresses per API call
