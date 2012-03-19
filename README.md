@@ -52,4 +52,9 @@ formatted and verified information, accessible like this:
     print verified_addresses[0].address2
     print verified_addresses[1].zip4
 
+##Notes
+* You may submit a maximum of 5 addresses per API call
+* Each address must include either the 5 digit zipcode (zip5) field or the city
+  and state fields. The verified address will include the complete address,
+  with all releveant fields
 
