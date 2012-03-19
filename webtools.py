@@ -165,7 +165,7 @@ class WebToolsAddress():
   
   @property
   def address(self):
-    return self.address_dict
+    return self.address
 
   @property
   def address1(self):

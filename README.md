@@ -56,7 +56,7 @@ formatted and verified information, accessible like this:
     print verified_addresses[1].zip4
     2409
 
-    print verified_addresses[1].address
+    print verified_addresses[1].address_dict
     {'city': 'DETROIT', 'firmname': "MUDGIE'S", 'address1': None, 'address2':
     '1300 PORTER ST', 'state': 'MI', 'id': '1', 'zip5': '48226', 'zip4':
     '2409'}
