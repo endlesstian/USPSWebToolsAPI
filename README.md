@@ -49,7 +49,7 @@ affirmatively, you may use the API like this:
 This will return an array of WebToolsAddress objects which contain the
 formatted and verified information, accessable like this:
 
-  print verified_addresses[0].address2
-  print verified_addresses[1].zip4
+    print verified_addresses[0].address2
+    print verified_addresses[1].zip4
 
 
