@@ -11,7 +11,7 @@ Service's [WebTools API](https://www.usps.com/business/webtools.htm).
 
 ##Usage
 Before you can make API calls, you need to
-[register](https://secure.shippingapis.com/registration/) with the USPS to get a
+[register](https://secure.shippingapis.com/registration/) with the USPS to get 
 your USERID.
 
 Before you can make API calls, you must make API calls to the USPS testing
